@@ -1,5 +1,5 @@
-const SECRET = "Chai";
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 async function UserAuth(req, res, next) {
     const token = req.cookies['token']; 
@@ -7,7 +7,7 @@ async function UserAuth(req, res, next) {
     let decoded_data;
     console.log('user token',token,"user type", user)
     try{
-         decoded_data = await jwt.verify(token, SECRET);
+         decoded_data = await jwt.verify(token, process.env.USER_SECRET);
 
     }catch(error){
         res.locals.autherror = error;
@@ -25,7 +25,7 @@ async function UserAuth(req, res, next) {
 async function AdminAuth(req, res, next) {
     const token = req.cookies.token; 
 
-    const decoded_data = await jwt.verify(token, SECRET);
+    const decoded_data = await jwt.verify(token, process.env.ADMIN_SECRET);
 
     if (decoded_data) {
         req.userId = decoded_data.id;
