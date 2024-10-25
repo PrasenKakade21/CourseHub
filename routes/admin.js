@@ -7,7 +7,7 @@ const { UserModel, AdminModel, CourseModel, PurchaseModel, ContactModel } = requ
 //validation
 const { z } = require("zod");
 //encryption
-const bcrypt = require("bcrypt");
+const bcrypt =  require('bcryptjs');
 //auth
 const jwt = require("jsonwebtoken");
 //endpoints

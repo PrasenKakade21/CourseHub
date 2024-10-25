@@ -15,7 +15,7 @@ const {
 //validation
 const { z, string } = require("zod");
 //encryption
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 //auth
 const jwt = require("jsonwebtoken");
 //endpoints
