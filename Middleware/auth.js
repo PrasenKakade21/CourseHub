@@ -40,6 +40,5 @@ async function AdminAuth(req, res, next) {
 
 module.exports = {
     UserAuth,
-    AdminAuth,
-    SECRET,
+    AdminAuth
 };

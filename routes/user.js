@@ -3,7 +3,7 @@ require("dotenv").config();
 //server
 const express = require("express");
 const userRouter = express.Router();
-const { UserAuth, SECRET } = require("../Middleware/auth");
+const { UserAuth } = require("../Middleware/auth");
 //db schemes
 const {
   UserModel,
