@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<%- include('navbar') %>
+<div class="container my-5">
+    <h2 class="text-center mb-4">User Profile</h2>
+    <!-- Profile Panel -->
+    <div id="profilePanel">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" value="<%= data.username %>"readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" value="<%= data.email %>" readonly>
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="tel" class="form-control" id="phone" value="<%= data.phone %>" readonly>
+        </div>
+
+        <div class="button-group text-center">
+            <button class="btn btn-primary" id="editButton">Edit</button>
+            <button class="btn btn-danger" id="updatePasswordButton">Update Password</button>
+        </div>
+    </div>
+
+    <!-- Password Change Panel -->
+    <div id="passwordPanel" class="hidden">
+        <h3 class="text-center mb-4">Change Password</h3>
+        <div class="mb-3">
+            <label for="currentPassword" class="form-label">Current Password</label>
+            <input type="password" class="form-control" id="currentPassword" required>
+        </div>
+        <div class="mb-3">
+            <label for="newPassword" class="form-label">New Password</label>
+            <input type="password" class="form-control" id="newPassword" required>
+        </div>
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm New Password</label>
+            <input type="password" class="form-control" id="confirmPassword" required>
+        </div>
+        <div class="button-group text-center">
+            <button class="btn btn-success" id="savePasswordButton">Save Password</button>
+            <button class="btn btn-secondary" id="cancelPasswordButton">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Edit Button Panel -->
+    <div id="editPanel" class="hidden">
+        <h3 class="text-center mb-4">Edit Profile</h3>
+        <div class="mb-3">
+            <label for="editName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="editName" value="<%= data.username %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="editEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="editEmail" value="<%= data.email %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="editPhone" class="form-label">Phone</label>
+            <input type="tel" class="form-control" id="editPhone" value="<%= data.phone %>" required>
+        </div>
+
+        <div class="button-group text-center">
+            <button class="btn btn-success" id="saveProfileButton">Save Changes</button>
+            <button class="btn btn-secondary" id="cancelEditButton">Cancel</button>
+        </div>
+    </div>
+</div>
+<%- include('footer') %>
+
+<script>
+    const editButton = document.getElementById('editButton');
+    const updatePasswordButton = document.getElementById('updatePasswordButton');
+    const savePasswordButton = document.getElementById('savePasswordButton');
+    const cancelPasswordButton = document.getElementById('cancelPasswordButton');
+    const saveProfileButton = document.getElementById('saveProfileButton');
+    const cancelEditButton = document.getElementById('cancelEditButton');
+
+    const nameField = document.getElementById('name');
+    const emailField = document.getElementById('email');
+    const phoneField = document.getElementById('phone');
+
+    const editNameField = document.getElementById('editName');
+    const editEmailField = document.getElementById('editEmail');
+    const editPhoneField = document.getElementById('editPhone');
+
+    const profilePanel = document.getElementById('profilePanel');
+    const passwordPanel = document.getElementById('passwordPanel');
+    const editPanel = document.getElementById('editPanel');
+
+    editButton.addEventListener('click', () => {
+        profilePanel.classList.add('hidden');
+        editPanel.classList.remove('hidden');
+
+        editNameField.value = nameField.value;
+        editEmailField.value = emailField.value;
+        editPhoneField.value = phoneField.value;
+    });
+
+    updatePasswordButton.addEventListener('click', () => {
+        profilePanel.classList.add('hidden');
+        passwordPanel.classList.remove('hidden');
+    });
+
+    cancelPasswordButton.addEventListener('click', () => {
+        passwordPanel.classList.add('hidden');
+        profilePanel.classList.remove('hidden');
+    });
+
+    // Save password (this is where you would normally handle the submission to the server)
+    savePasswordButton.addEventListener('click', () => {
+        updatePassword();
+    });
+
+    // Save edited profile information
+    saveProfileButton.addEventListener('click', () => {
+        updateProfile();
+  editPanel.classList.add('hidden');
+  profilePanel.classList.remove('hidden');
+    });
+
+    // Cancel editing and return to profile
+    cancelEditButton.addEventListener('click', () => {
+        editPanel.classList.add('hidden');
+        profilePanel.classList.remove('hidden');
+    });
+</script>
+
+</body>
+</html>
